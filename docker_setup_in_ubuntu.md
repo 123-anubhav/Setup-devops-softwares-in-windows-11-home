@@ -110,3 +110,52 @@ newgrp docker
 ```bash
 docker run hello-world
 ```
+
+---
+
+## 🛠️ Troubleshooting: Permission Denied Error
+
+If you see the following error after Docker installation:
+
+```bash
+docker images
+```
+
+You get:
+
+```
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: 
+Head "http://%2Fvar%2Frun%2Fdocker.sock/_ping": dial unix /var/run/docker.sock: connect: permission denied
+```
+
+### ✅ Option 1: Run with `sudo` (Quick Fix)
+
+```bash
+sudo docker images
+```
+
+> You'll need to use `sudo` every time unless you fix permissions.
+
+---
+
+### ✅ Option 2: Add Your User to the `docker` Group (Recommended)
+
+1. Add your user to the Docker group:
+
+```bash
+sudo usermod -aG docker $USER
+```
+
+2. Apply the group change by logging out and back in, or run:
+
+```bash
+newgrp docker
+```
+
+3. Try again:
+
+```bash
+docker images
+```
+
+✅ You should no longer get the "permission denied" error.
